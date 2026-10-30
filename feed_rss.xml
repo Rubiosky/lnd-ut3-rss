@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Autor: Rubén Pérez Tejera
+    Curso: 1.º ASIR-B
+    Actividad: Creación y validación de un canal RSS.
+
+    Creo este archivo para reunir las publicaciones del blog
+    ficticio Tech News. Un lector de RSS podrá consultar el
+    archivo y mostrar las entradas sin que el usuario tenga
+    que visitar por separado cada página.
+
+    La declaración de la primera línea indica que utilizo XML 1.0.
+    La codificación UTF-8 permite guardar correctamente las
+    tildes, la letra ñ y otros caracteres del texto.
+-->
+
+<!--
+    Utilizo rss como elemento raíz: todo el contenido del
+    documento queda dentro de esta etiqueta.
+
+    El atributo version="2.0" indica la versión de RSS que
+    debe interpretar el lector. Esta versión es distinta
+    de la versión de XML indicada en la primera línea.
+-->
+<rss version="2.0">
+
+	<!--
+        Dentro de channel agrupo los datos generales del blog
+        y las publicaciones que quiero distribuir.
+
+        Primero identifico el canal y después añado sus artículos.
+        Así, el lector puede distinguir el nombre del blog
+        de los títulos de cada publicación.
+    -->
+	<channel>
+
+		<!--
+            Estos tres elementos describen el canal:
+
+            title contiene el nombre que verá el usuario.
+            link indica la dirección del sitio asociado al canal.
+            description explica brevemente de qué trata el blog.
+
+            Mantengo los datos indicados en el enunciado.
+            Este link identifica el sitio del blog; no es
+            la dirección donde publicaré el archivo feed_rss.xml.
+        -->
+		<title>Tech News</title>
+		<link>https://www.technews.com</link>
+		<description>Las últimas novedades tecnológicas</description>
+
+		<!--
+            Cada bloque item representa una publicación distinta.
+
+            En cada uno incluyo:
+            - title: el título de la publicación.
+            - link: la dirección que se abrirá al consultar el enlace.
+            - description: un resumen para conocer el contenido.
+            - pubDate: la fecha y la hora de publicación.
+            - guid: un identificador único de la entrada.
+
+            Como el blog es ficticio, redacto tres entradas de
+            ejemplo y las enlazo con recursos reales de MDN.
+            Así puedo comprobar que los enlaces funcionan
+            sin inventar direcciones de artículos inexistentes.
+
+            Ordeno las entradas desde la más reciente.
+        -->
+
+		<!--
+            Primera publicación: presentación de un recurso sobre XML.
+
+            En description utilizo texto sencillo para que el
+            resumen pueda leerse sin necesitar etiquetas HTML.
+        -->
+		<item>
+			<title>Recurso para aprender a organizar información con XML</title>
+			<link>https://developer.mozilla.org/es/docs/Web/XML/Guides/XML_introduction</link>
+
+			<description>
+				En esta entrada de Tech News compartimos una introducción
+				a XML. El recurso explica cómo utilizar etiquetas para
+				organizar datos y representar información estructurada,
+				una base útil para comprender los canales RSS.
+			</description>
+
+			<!--
+                pubDate sigue el formato de fecha utilizado por RSS.
+
+                Wed indica miércoles y Oct indica octubre.
+                Después del día de la semana aparecen el día del mes,
+                el mes, el año y la hora.
+                GMT señala la zona horaria utilizada.
+
+                Esta fecha representa la publicación de la entrada
+                en el blog ficticio, no la fecha del recurso enlazado.
+                Aplico el mismo criterio a las otras dos entradas.
+            -->
+			<pubDate>Wed, 28 Oct 2026 10:00:00 GMT</pubDate>
+
+			<!--
+                Utilizo guid para que el lector pueda reconocer
+                esta publicación cuando vuelva a consultar el canal.
+
+                Asigno un identificador diferente a cada entrada.
+                Lo mantendré aunque cambie el título o el resumen,
+                para que siga identificando la misma publicación.
+
+                isPermaLink="false" indica que este valor es un
+                identificador de texto, no una dirección web.
+                Para abrir el recurso se utiliza el elemento link.
+            -->
+			<guid isPermaLink="false">tech-news-001</guid>
+		</item>
+
+		<!--
+            Segunda publicación: recurso sobre la estructura de una web.
+
+            Creo otro item porque se trata de una entrada independiente.
+            Repito la misma estructura para que los datos de esta
+            publicación queden agrupados dentro de su propio bloque.
+        -->
+		<item>
+			<title>Guía de HTML para estructurar páginas web</title>
+			<link>https://developer.mozilla.org/es/docs/Web/HTML</link>
+
+			<description>
+				En Tech News presentamos una guía de HTML para repasar
+				cómo se organiza el contenido de una página web.
+				Incluye información sobre elementos utilizados para
+				representar textos, enlaces, imágenes y otras partes
+				del contenido.
+			</description>
+
+			<pubDate>Tue, 27 Oct 2026 10:00:00 GMT</pubDate>
+
+			<!--
+                Asigno a esta entrada su propio identificador.
+                No reutilizo el de la primera publicación porque
+                el lector debe distinguirlas.
+            -->
+			<guid isPermaLink="false">tech-news-002</guid>
+		</item>
+
+		<!--
+            Tercera publicación: recurso sobre la presentación con CSS.
+
+            El enlace lleva a una página diferente de las anteriores.
+            Esto permite consultar el recurso relacionado con esta
+            entrada desde el agregador.
+        -->
+		<item>
+			<title>Recurso de CSS para dar estilo a las páginas web</title>
+			<link>https://developer.mozilla.org/es/docs/Web/CSS</link>
+
+			<description>
+				Compartimos un recurso de CSS para conocer cómo se
+				define la presentación de una página web. Permite
+				consultar propiedades relacionadas con los colores,
+				las fuentes, los espacios y la distribución de los
+				elementos.
+			</description>
+
+			<pubDate>Mon, 26 Oct 2026 10:00:00 GMT</pubDate>
+
+			<!--
+                Este identificador corresponde a la tercera entrada
+                y se mantiene distinto de los otros dos.
+            -->
+			<guid isPermaLink="false">tech-news-003</guid>
+		</item>
+
+		<!--
+            Aquí terminan las publicaciones del canal.
+            Cierro primero channel y después rss porque channel
+            está contenido dentro de rss. Respetar este orden
+            mantiene las etiquetas correctamente anidadas.
+        -->
+	</channel>
+</rss>
