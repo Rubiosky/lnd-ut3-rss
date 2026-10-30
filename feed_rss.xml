@@ -19,11 +19,19 @@
     Utilizo rss como elemento raíz: todo el contenido del
     documento queda dentro de esta etiqueta.
 
-    El atributo version="2.0" indica la versión de RSS que
-    debe interpretar el lector. Esta versión es distinta
-    de la versión de XML indicada en la primera línea.
+    El atributo version="2.0" indica la versión de RSS.
+    Esta versión es distinta de la versión de XML indicada
+    en la primera línea.
+
+    Con xmlns:atom declaro el prefijo atom y lo asocio al
+    espacio de nombres de Atom. Esto permite reconocer
+    el elemento atom:link que utilizo dentro del canal.
+
+    La dirección del espacio de nombres identifica ese
+    vocabulario; no es la dirección de mi archivo.
+    El documento sigue siendo un canal RSS 2.0.
 -->
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 
 	<!--
         Dentro de channel agrupo los datos generales del blog
@@ -44,26 +52,45 @@
 
             Mantengo los datos indicados en el enunciado.
             Este link identifica el sitio del blog; no es
-            la dirección donde publicaré el archivo feed_rss.xml.
+            la dirección donde está publicado feed_rss.xml.
         -->
 		<title>Tech News</title>
 		<link>https://www.technews.com</link>
 		<description>Las últimas novedades tecnológicas</description>
 
 		<!--
+            Indico la dirección pública de este archivo RSS.
+
+            href contiene la URL donde está publicado.
+            rel="self" indica que apunta al propio canal.
+            type identifica el contenido como RSS en XML.
+
+            Así, los lectores pueden identificar la dirección
+            del archivo que contiene las publicaciones.
+
+            Utilizo una etiqueta que termina en /> porque
+            toda su información está en los atributos y
+            no contiene texto ni otros elementos dentro.
+        -->
+		<atom:link
+            href="https://rubiosky.github.io/lnd-ut3-rss/feed_rss.xml"
+            rel="self"
+            type="application/rss+xml" />
+
+		<!--
             Cada bloque item representa una publicación distinta.
 
             En cada uno incluyo:
             - title: el título de la publicación.
-            - link: la dirección que se abrirá al consultar el enlace.
-            - description: un resumen para conocer el contenido.
+            - link: la dirección del recurso que se puede consultar.
+            - description: un resumen de su contenido.
             - pubDate: la fecha y la hora de publicación.
             - guid: un identificador único de la entrada.
 
             Como el blog es ficticio, redacto tres entradas de
             ejemplo y las enlazo con recursos reales de MDN.
-            Así puedo comprobar que los enlaces funcionan
-            sin inventar direcciones de artículos inexistentes.
+            Así puedo comprobar los enlaces sin inventar
+            direcciones de artículos inexistentes.
 
             Ordeno las entradas desde la más reciente.
         -->
